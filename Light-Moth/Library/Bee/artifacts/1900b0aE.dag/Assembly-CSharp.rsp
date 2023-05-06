@@ -352,15 +352,15 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/Scripts/2DScripts/Moth2D.cs"
+"Assets/Scripts/2DScripts/TwoDLight.cs"
+"Assets/Scripts/2DScripts/TwoDOnOff.cs"
 "Assets/Scripts/Light.cs"
 "Assets/Scripts/LightManager.cs"
 "Assets/Scripts/LookAt.cs"
 "Assets/Scripts/Moth.cs"
-"Assets/Scripts/Moth2D.cs"
 "Assets/Scripts/OnOff.cs"
 "Assets/Scripts/SliderComponent.cs"
-"Assets/Scripts/TwoDLight.cs"
-"Assets/Scripts/TwoDOnOff.cs"
 -langversion:9.0
 
 /deterministic
