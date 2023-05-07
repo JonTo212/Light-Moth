@@ -20,13 +20,13 @@ public class OnOff : MonoBehaviour
         if (mouseOver && Input.GetMouseButtonDown(0) && !attachedLight.isOn)
         {
             attachedLight.isOn = true;
-            attachedLight.currentButton = Instantiate(bulb, this.gameObject.transform.parent);
+            Instantiate(bulb, this.gameObject.transform.parent);
             Destroy(this.gameObject);
         }
         else if (mouseOver && Input.GetMouseButtonDown(0) && attachedLight.isOn)
         {
             attachedLight.isOn = false;
-            attachedLight.currentButton = Instantiate(bulb, this.gameObject.transform.parent);
+            Instantiate(bulb, this.gameObject.transform.parent);
             Destroy(this.gameObject);
         }
     }
