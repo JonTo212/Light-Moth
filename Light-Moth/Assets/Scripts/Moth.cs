@@ -52,12 +52,21 @@ public class Moth : MonoBehaviour
         {
             if (lights[i] != null)
             {
-                center += lights[i].transform.position;
-                count++;
+                Vector3 newPos = lights[i].transform.position * lights[i].intensity;
+
+                if (newPos != Vector3.zero)
+                {
+                    center += lights[i].transform.position * lights[i].intensity;
+                    count++;
+                }
             }
         }
         center = center / count;
-        print(center);
+
+        if (float.IsNaN(center.x))
+        {
+            return transform.position;
+        }
         return center;
     }
 
