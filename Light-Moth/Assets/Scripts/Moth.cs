@@ -7,7 +7,6 @@ public class Moth : MonoBehaviour
     public float speed;
     public float radius;
     Light[] activeLights;
-    float[] activeLightIntensities;
 
     void FixedUpdate()
     {
@@ -18,8 +17,6 @@ public class Moth : MonoBehaviour
     {
         Collider[] lights = Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Light"));
         activeLights = new Light[lights.Length];
-        activeLightIntensities = new float[lights.Length];
-        Vector3 centerPoint = Vector3.zero;
 
         if (lights.Length > 0)
         {
@@ -29,46 +26,43 @@ public class Moth : MonoBehaviour
 
                 if (light.isOn)
                 {
-                    //MoveTo(lights[i].transform.position, light.intensity);
                     activeLights[i] = light;
-                    activeLightIntensities[i] = light.intensity;
-                    centerPoint = GetCenterPoint(activeLights);
                 }
             }
+            GetUsableLights(activeLights);
+            MoveTo(newPos, newIntensity);
         }
-        MoveTo(centerPoint);
     }
 
-    void MoveTo(Vector3 target)
+    void MoveTo(Vector3 target, float intensity)
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, intensity * speed * Time.deltaTime);
     }
 
-    Vector3 GetCenterPoint(Light[] lights)
+    Vector3 newPos;
+    float newIntensity;
+
+    void GetUsableLights(Light[] lights)
     {
-        Vector3 center = Vector3.zero;
+        newPos = Vector3.zero;
+        newIntensity = 0;
         float count = 0;
         for (int i = 0; i < lights.Length; i++)
         {
-            if (lights[i] != null)
+            if (lights[i] != null && lights[i].intensity != 0)
             {
-                Vector3 newPos = lights[i].transform.position * lights[i].intensity;
-
-                if (newPos != Vector3.zero)
-                {
-                    center += lights[i].transform.position * lights[i].intensity;
-                    count++;
-                }
+                newPos += lights[i].transform.position * lights[i].intensity;
+                newIntensity += lights[i].intensity;
+                count++;
             }
         }
-        center = center / count;
-
-        if (float.IsNaN(center.x))
+        if (newIntensity != 0)
         {
-            return transform.position;
+            newPos = newPos / newIntensity;
+            newIntensity = newIntensity / count;
         }
-        return center;
     }
+
 
     void OnDrawGizmos()
     {
