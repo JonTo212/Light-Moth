@@ -15,7 +15,7 @@ public class Light : MonoBehaviour
     private Slider currentSliderBar;
     public GameObject onBulb;
     public GameObject offBulb;
-    private GameObject currentButton;
+    public GameObject currentButton;
 
     void Start()
     {
