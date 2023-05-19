@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class OnOff : MonoBehaviour
 {
-    Light attachedLight;
+    LightObject attachedLight;
     SphereCollider hitbox;
     bool mouseOver;
     public GameObject bulb;
 
     void Start()
     {
-        attachedLight = GetComponentInParent<Light>();
+        attachedLight = GetComponentInParent<LightObject>();
         hitbox = GetComponent<SphereCollider>();
     }
 

@@ -6,7 +6,7 @@ public class Moth : MonoBehaviour
 {
     public float speed;
     public float radius;
-    Light[] activeLights;
+    LightObject[] activeLights;
 
     void FixedUpdate()
     {
@@ -16,13 +16,13 @@ public class Moth : MonoBehaviour
     void GetLights()
     {
         Collider[] lights = Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Light"));
-        activeLights = new Light[lights.Length];
+        activeLights = new LightObject[lights.Length];
 
         if (lights.Length > 0)
         {
             for (int i = 0; i < lights.Length; i++)
             {
-                Light light = lights[i].GetComponent<Light>();
+                LightObject light = lights[i].GetComponent<LightObject>();
 
                 if (light.isOn)
                 {
@@ -37,12 +37,14 @@ public class Moth : MonoBehaviour
     void MoveTo(Vector3 target, float intensity)
     {
         transform.position = Vector3.MoveTowards(transform.position, target, intensity * speed * Time.deltaTime);
+        Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
     }
 
     Vector3 newPos;
     float newIntensity;
 
-    void GetUsableLights(Light[] lights)
+    void GetUsableLights(LightObject[] lights)
     {
         newPos = Vector3.zero;
         newIntensity = 0;
