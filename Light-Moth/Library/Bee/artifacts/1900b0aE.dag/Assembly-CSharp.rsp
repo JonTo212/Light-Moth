@@ -361,6 +361,7 @@
 "Assets/Scripts/Moth2D.cs"
 "Assets/Scripts/OnOff.cs"
 "Assets/Scripts/SliderComponent.cs"
+"Assets/Scripts/TransparencyAdjuster.cs"
 "Assets/Scripts/TwoDLight.cs"
 "Assets/Scripts/TwoDOnOff.cs"
 -langversion:9.0

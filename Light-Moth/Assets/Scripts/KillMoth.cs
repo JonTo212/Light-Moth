@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class KillMoth : MonoBehaviour
 {
-    Moth player;
-    // Start is called before the first frame update
+    public Transform respawn;
+    LightObject attachedLight;
+
     void Start()
     {
-
+        attachedLight = GetComponentInParent<LightObject>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
-
+        if (other.tag == "Player")
+        {
+            other.transform.position = respawn.position;
+            attachedLight.isOn = false;
+            attachedLight.intensity = 0;
+            Destroy(attachedLight.currentButton);
+        }
     }
 }
