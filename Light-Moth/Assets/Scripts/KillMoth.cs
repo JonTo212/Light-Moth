@@ -14,12 +14,16 @@ public class KillMoth : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (attachedLight.isOn)
         {
-            other.transform.position = respawn.position;
-            attachedLight.isOn = false;
-            attachedLight.intensity = 0;
-            Destroy(attachedLight.currentButton);
+            if (other.tag == "Player")
+            {
+                other.transform.position = respawn.position;
+                other.attachedRigidbody.velocity = Vector3.zero;
+                attachedLight.isOn = false;
+                attachedLight.intensity = 0;
+                Destroy(attachedLight.currentButton);
+            }
         }
     }
 }

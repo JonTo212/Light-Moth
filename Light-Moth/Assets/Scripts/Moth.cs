@@ -7,6 +7,7 @@ public class Moth : MonoBehaviour
     public float speed;
     public float radius;
     LightObject[] activeLights;
+    public Rigidbody rb;
 
     void FixedUpdate()
     {
@@ -36,9 +37,19 @@ public class Moth : MonoBehaviour
 
     void MoveTo(Vector3 target, float intensity)
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, intensity * speed * Time.deltaTime);
-        Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, target, intensity * speed * Time.deltaTime);
+        if (target != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
+        }
+        else
+        {
+            transform.rotation = Quaternion.identity;
+        }
+
+        print(target);
+        rb.AddForce(target);
     }
 
     Vector3 newPos;
