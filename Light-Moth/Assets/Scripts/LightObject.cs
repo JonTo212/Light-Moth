@@ -47,6 +47,7 @@ public class LightObject : MonoBehaviour
         {
             Destroy(currentButton);
         }
+
         lighting.intensity = intensity * 2;
     }
 
@@ -74,6 +75,10 @@ public class LightObject : MonoBehaviour
         }
         currentSlider.transform.rotation = Quaternion.LookRotation(transform.position - cam.transform.position);
         intensity = currentSliderBar.value;
+        if (intensity <= 0)
+        {
+            currentSliderBar.value = 0.01f;
+        }
     }
 
     void OnOpen()

@@ -45,11 +45,11 @@ public class Moth : MonoBehaviour
         }
         else
         {
-            transform.rotation = Quaternion.identity;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 5 * Time.deltaTime);
         }
 
-        print(target);
-        rb.AddForce(target);
+        Vector3 force = (target - transform.position) * intensity * speed * Time.deltaTime;
+        rb.AddForce(force);
     }
 
     Vector3 newPos;
