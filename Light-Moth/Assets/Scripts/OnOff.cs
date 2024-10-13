@@ -27,6 +27,7 @@ public class OnOff : MonoBehaviour
         {
             attachedLight.isOn = false;
             attachedLight.currentButton = Instantiate(bulb, this.gameObject.transform.parent);
+            attachedLight.intensity = 0;
             Destroy(this.gameObject);
         }
     }
